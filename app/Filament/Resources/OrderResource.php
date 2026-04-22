@@ -40,8 +40,9 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('payment_method')
                     ->label('Método de Pago')
                     ->options([
+                        'stripe' => 'Stripe (Tarjeta)',
+                        'bank_transfer' => 'Depósito (Transferencia)',
                         'paypal' => 'PayPal',
-                        'deposit' => 'Depósito (Transferencia)',
                     ])
                     ->required()
                     ->live(),
@@ -57,7 +58,11 @@ class OrderResource extends Resource
                 Forms\Components\FileUpload::make('proof_of_payment_path')
                     ->label('Comprobante de Pago')
                     ->directory('proofs')
-                    ->visible(fn(Get $get) => $get('payment_method') === 'deposit'),
+                    ->disk('public')
+                    ->visibility('public')
+                    ->openable()
+                    ->downloadable()
+                    ->visible(fn(Get $get) => $get('payment_method') === 'bank_transfer'),
                 Forms\Components\TextInput::make('amount')
                     ->label('Monto')
                     ->numeric()
@@ -85,8 +90,11 @@ class OrderResource extends Resource
                     ->label('Método de Pago')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'paypal' => 'info',
-                        'deposit' => 'warning',
+                        'stripe' => 'info',
+                        'paypal' => 'primary',
+                        'bank_transfer' => 'warning',
+                        'deposit' => 'warning', // Backward compatibility if any old records exist
+                        default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Estado')

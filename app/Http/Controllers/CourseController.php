@@ -17,7 +17,13 @@ class CourseController extends Controller
     public function show($slug)
     {
         $course = Course::where('slug', $slug)->where('is_published', true)->firstOrFail();
-        return view('courses.show', compact('course'));
+        
+        $isOwned = false;
+        if (auth()->check()) {
+            $isOwned = auth()->user()->courses()->where('courses.id', $course->id)->exists();
+        }
+
+        return view('courses.show', compact('course', 'isOwned'));
     }
 
     public function lesson($course_slug, $lesson_id = null)
@@ -54,6 +60,28 @@ class CourseController extends Controller
         $previousLesson = $currentIndex > 0 ? $lessons[$currentIndex - 1] : null;
         $nextLesson = $currentIndex < $lessons->count() - 1 ? $lessons[$currentIndex + 1] : null;
 
-        return view('lessons.show', compact('course', 'currentLesson', 'lessons', 'previousLesson', 'nextLesson'));
+        $completedLessonIds = auth()->user()->completedLessons()->pluck('lesson_id')->toArray();
+
+        return view('lessons.show', compact('course', 'currentLesson', 'lessons', 'previousLesson', 'nextLesson', 'completedLessonIds'));
+    }
+
+    public function toggleComplete(Request $request, Lesson $lesson)
+    {
+        $user = auth()->user();
+        
+        // Access Control: Check if user owns the course
+        if (!$user->courses()->where('courses.id', $lesson->course_id)->exists()) {
+            return back()->with('error', 'No tienes permiso para marcar esta lección.');
+        }
+
+        if ($user->completedLessons()->where('lesson_id', $lesson->id)->exists()) {
+            $user->completedLessons()->detach($lesson->id);
+            $message = 'Lección marcada como no completada.';
+        } else {
+            $user->completedLessons()->attach($lesson->id);
+            $message = '¡Lección completada!';
+        }
+
+        return back()->with('success', $message);
     }
 }

@@ -134,10 +134,17 @@
                     <a href="{{ route('lessons.show', ['course_slug' => $course->slug, 'lesson_id' => $lesson->id]) }}"
                         class="block mb-2 p-3 rounded-xl transition-all {{ $lesson->id === $currentLesson->id ? 'bg-[#FF6600]/10 border border-[#FF6600]/30 text-white' : 'text-slate-400 hover:bg-slate-700/50 hover:text-slate-200' }}">
                         <div class="flex items-start">
-                            <span
-                                class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold mr-3 {{ $lesson->id === $currentLesson->id ? 'bg-[#FF6600] text-white' : 'bg-slate-700 text-slate-500' }}">
-                                {{ $loop->iteration }}
-                            </span>
+                            <div class="relative flex-shrink-0 mr-3">
+                                <span
+                                    class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold {{ $lesson->id === $currentLesson->id ? 'bg-[#FF6600] text-white' : 'bg-slate-700 text-slate-500' }}">
+                                    {{ $loop->iteration }}
+                                </span>
+                                @if(in_array($lesson->id, $completedLessonIds))
+                                    <div class="absolute -top-1 -right-1 bg-green-500 rounded-full p-0.5 border border-slate-800">
+                                        <svg class="w-2 h-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                @endif
+                            </div>
                             <div class="flex-1">
                                 <span class="text-sm font-medium leading-tight block">{{ $lesson->title }}</span>
                                 @if($lesson->id === $currentLesson->id)
@@ -186,33 +193,60 @@
                 </div>
 
                 <!-- Lesson Info & Nav -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                    <h1 class="text-2xl md:text-3xl font-bold text-white mb-4 md:mb-0">{{ $currentLesson->title }}</h1>
+                <div class="flex flex-col mb-8 p-6 bg-slate-800/50 rounded-2xl border border-slate-700">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <div class="mb-4 md:mb-0">
+                            <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">{{ $currentLesson->title }}</h1>
+                            @if(in_array($currentLesson->id, $completedLessonIds))
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-500/10 text-green-400 border border-green-500/20">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    Lección Completada
+                                </span>
+                            @endif
+                        </div>
 
-                    <div class="flex space-x-3 w-full md:w-auto">
-                        @if($previousLesson)
-                            <a href="{{ route('lessons.show', ['course_slug' => $course->slug, 'lesson_id' => $previousLesson->id]) }}"
-                                class="flex-1 md:flex-none text-center px-4 py-2 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg hover:bg-slate-700 hover:text-white transition-colors">
-                                &larr; Anterior
-                            </a>
-                        @else
-                            <button disabled
-                                class="flex-1 md:flex-none px-4 py-2 bg-slate-800/50 border border-slate-700/50 text-slate-600 rounded-lg cursor-not-allowed">
-                                &larr; Anterior
-                            </button>
-                        @endif
+                        <form action="{{ route('lessons.toggle-complete', $currentLesson->id) }}" method="POST">
+                            @csrf
+                            @if(in_array($currentLesson->id, $completedLessonIds))
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors text-sm font-bold border border-slate-600">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    Marcar como no terminada
+                                </button>
+                            @else
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-bold shadow-lg shadow-green-900/20">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Marcar como Terminada
+                                </button>
+                            @endif
+                        </form>
+                    </div>
 
-                        @if($nextLesson)
-                            <a href="{{ route('lessons.show', ['course_slug' => $course->slug, 'lesson_id' => $nextLesson->id]) }}"
-                                class="flex-1 md:flex-none text-center px-4 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E65C00] transition-colors font-medium">
-                                Siguiente &rarr;
-                            </a>
-                        @else
-                            <a href="{{ route('dashboard') }}"
-                                class="flex-1 md:flex-none text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
-                                Finalizar &rarr;
-                            </a>
-                        @endif
+                    <div class="flex items-center justify-between pt-6 border-t border-slate-700">
+                        <div class="flex space-x-3 w-full md:w-auto">
+                            @if($previousLesson)
+                                <a href="{{ route('lessons.show', ['course_slug' => $course->slug, 'lesson_id' => $previousLesson->id]) }}"
+                                    class="flex-1 md:flex-none text-center px-4 py-2 bg-slate-800 border border-slate-700 text-slate-300 rounded-lg hover:bg-slate-700 hover:text-white transition-colors">
+                                    &larr; Anterior
+                                </a>
+                            @else
+                                <button disabled
+                                    class="flex-1 md:flex-none px-4 py-2 bg-slate-800/50 border border-slate-700/50 text-slate-600 rounded-lg cursor-not-allowed">
+                                    &larr; Anterior
+                                </button>
+                            @endif
+
+                            @if($nextLesson)
+                                <a href="{{ route('lessons.show', ['course_slug' => $course->slug, 'lesson_id' => $nextLesson->id]) }}"
+                                    class="flex-1 md:flex-none text-center px-4 py-2 bg-[#FF6600] text-white rounded-lg hover:bg-[#E65C00] transition-colors font-medium">
+                                    Siguiente &rarr;
+                                </a>
+                            @else
+                                <a href="{{ route('dashboard') }}"
+                                    class="flex-1 md:flex-none text-center px-4 py-2 bg-slate-800 text-slate-300 border border-slate-700 rounded-lg hover:bg-slate-700 hover:text-white transition-colors font-medium">
+                                    Finalizar &rarr;
+                                </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
 

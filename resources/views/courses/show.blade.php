@@ -16,10 +16,25 @@
                         </div>
 
                         <div class="flex space-x-4">
-                            <a href="{{ route('lessons.show', ['course_slug' => $course->slug]) }}"
-                                class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-2xl text-white bg-[#FF6600] hover:bg-[#E65C00] transition-colors shadow-sm hover:shadow-md">
-                                Entrar al Curso
-                            </a>
+                            @if($isOwned)
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <a href="{{ route('lessons.show', ['course_slug' => $course->slug]) }}"
+                                        class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-2xl text-white bg-green-600 hover:bg-green-700 transition-colors shadow-sm hover:shadow-md">
+                                        Entrar al Curso
+                                    </a>
+                                    @if($course->quiz && $course->quiz->is_active)
+                                        <a href="{{ route('quizzes.show', $course) }}"
+                                            class="inline-flex items-center justify-center px-5 py-3 border-2 border-[#FF6600] text-base font-medium rounded-2xl text-[#FF6600] hover:bg-[#FF6600] hover:text-white transition-all shadow-sm">
+                                            Tomar Cuestionario
+                                        </a>
+                                    @endif
+                                </div>
+                            @else
+                                <a href="{{ route('checkout.show', $course) }}"
+                                    class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-2xl text-white bg-[#FF6600] hover:bg-[#E65C00] transition-all shadow-lg hover:shadow-[#FF6600]/30 transform hover:-translate-y-1">
+                                    Inscribirse Ahora
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>

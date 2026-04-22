@@ -13,6 +13,7 @@ class Order extends Model
         'payment_method',
         'status',
         'proof_of_payment_path',
+        'stripe_session_id',
         'amount',
     ];
 

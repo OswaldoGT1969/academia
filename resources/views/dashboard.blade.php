@@ -107,13 +107,57 @@
                             </div>
                             <div class="flex-1 p-6 flex flex-col">
                                 <h3 class="text-xl font-bold text-white mb-2 leading-tight">{{ $course->title }}</h3>
+                                
+                                <div class="mb-6">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs font-bold text-slate-400 uppercase">Progreso</span>
+                                        <span class="text-xs font-bold text-[#FF6600]">{{ $course->progress_percent }}%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-gradient-to-r from-[#FF6600] to-orange-400 h-1.5 rounded-full transition-all duration-1000" style="width: {{ $course->progress_percent }}%"></div>
+                                    </div>
+                                    <div class="mt-1 flex justify-between">
+                                        <span class="text-[10px] text-slate-500 font-medium">{{ $course->completed_count }} de {{ $course->total_count }} lecciones</span>
+                                        @if($course->progress_percent == 100)
+                                            <span class="text-[10px] text-green-500 font-bold uppercase tracking-tighter">¡Listo para el examen!</span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="text-slate-400 text-sm mb-6 line-clamp-2">
                                     {!! strip_tags($course->description) !!}
                                 </div>
-                                <div class="mt-auto">
+                                <div class="mt-auto space-y-3">
                                     <a href="{{ route('lessons.show', $course->slug) }}" class="block w-full text-center px-4 py-3 border border-transparent text-sm font-bold rounded-xl text-white bg-[#FF6600] hover:bg-[#E65C00] transition-colors shadow-lg hover:shadow-[#FF6600]/20">
                                         Continuar Aprendiendo
                                     </a>
+
+                                    @if($course->quiz)
+                                        @php
+                                            $bestAttempt = Auth::user()->quizAttempts()->where('quiz_id', $course->quiz->id)->orderByDesc('score')->first();
+                                            $hasPassed = $bestAttempt ? $bestAttempt->passed : false;
+                                        @endphp
+                                        
+                                        @if($hasPassed)
+                                            <div class="flex flex-col space-y-3">
+                                                <div class="flex items-center justify-between px-4 py-3 bg-green-500/10 border border-green-500/20 rounded-xl">
+                                                    <span class="text-green-400 text-sm font-bold flex items-center">
+                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                                        Aprobado ({{ $bestAttempt->score }}%)
+                                                    </span>
+                                                    <a href="{{ route('quizzes.show', $course->slug) }}" class="text-[#FF6600] text-xs font-bold hover:underline">Repetir</a>
+                                                </div>
+                                                <a href="{{ route('quizzes.certificate', $course->slug) }}" class="block w-full text-center px-4 py-3 bg-slate-800 border border-slate-700 text-white text-sm font-bold rounded-xl hover:bg-slate-700 transition-all flex items-center justify-center">
+                                                    <svg class="w-4 h-4 mr-2 text-[#C5A059]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                                                    Descargar Diploma
+                                                </a>
+                                            </div>
+                                        @else
+                                            <a href="{{ route('quizzes.show', $course->slug) }}" class="block w-full text-center px-4 py-3 border-2 border-[#FF6600] text-sm font-bold rounded-xl text-[#FF6600] hover:bg-[#FF6600] hover:text-white transition-all shadow-md">
+                                                Tomar Cuestionario
+                                            </a>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                         </div>

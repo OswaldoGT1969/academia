@@ -31,4 +31,9 @@ class Course extends Model
             ->withPivot(['id', 'status', 'payment_method', 'amount'])
             ->withTimestamps();
     }
+
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Quiz::class);
+    }
 }

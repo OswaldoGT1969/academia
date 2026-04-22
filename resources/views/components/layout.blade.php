@@ -50,9 +50,9 @@
                         <img class="h-10 w-auto" src="{{ asset('images/logo-buenfil.jpg') }}" alt="Academia Buenfil">
                     </div>
                     <nav class="mt-5 px-2 space-y-1">
-                        <a href="/"
-                            class="{{ request()->is('/') ? 'bg-orange-900/20 text-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                            <svg class="{{ request()->is('/') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-4 flex-shrink-0 h-6 w-6"
+                        <a href="{{ route('home') }}"
+                            class="{{ request()->routeIs('home') ? 'bg-orange-900/20 text-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            <svg class="{{ request()->routeIs('home') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-4 flex-shrink-0 h-6 w-6"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -61,9 +61,9 @@
                             Inicio
                         </a>
 
-                        <a href="#"
-                            class="text-slate-400 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                            <svg class="text-slate-500 group-hover:text-slate-300 mr-4 flex-shrink-0 h-6 w-6"
+                        <a href="{{ route('dashboard') }}"
+                            class="{{ request()->routeIs('dashboard') ? 'bg-orange-900/20 text-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            <svg class="{{ request()->routeIs('dashboard') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-4 flex-shrink-0 h-6 w-6"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -81,19 +81,6 @@
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Certificados
-                        </a>
-
-                        <a href="#"
-                            class="text-slate-400 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                            <svg class="text-slate-500 group-hover:text-slate-300 mr-4 flex-shrink-0 h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            Configuración
                         </a>
                     </nav>
                 </div>
@@ -108,9 +95,9 @@
                         <img class="h-16 w-auto" src="{{ asset('images/logo-buenfil.jpg') }}" alt="Academia Buenfil">
                     </div>
                     <nav class="mt-5 flex-1 px-2 space-y-1">
-                        <a href="/"
-                            class="{{ request()->is('/') ? 'bg-orange-900/20 text-[#FF6600] border-r-4 border-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-sm font-medium">
-                            <svg class="{{ request()->is('/') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-3 flex-shrink-0 h-6 w-6"
+                        <a href="{{ route('home') }}"
+                            class="{{ request()->routeIs('home') ? 'bg-orange-900/20 text-[#FF6600] border-r-4 border-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-sm font-medium">
+                            <svg class="{{ request()->routeIs('home') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-3 flex-shrink-0 h-6 w-6"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -119,9 +106,9 @@
                             Inicio
                         </a>
 
-                        <a href="#"
-                            class="text-slate-400 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium">
-                            <svg class="text-slate-500 group-hover:text-slate-300 mr-3 flex-shrink-0 h-6 w-6"
+                        <a href="{{ route('dashboard') }}"
+                            class="{{ request()->routeIs('dashboard') ? 'bg-orange-900/20 text-[#FF6600] border-r-4 border-[#FF6600]' : 'text-slate-400 hover:bg-slate-700 hover:text-white' }} group flex items-center px-2 py-2 text-sm font-medium">
+                            <svg class="{{ request()->routeIs('dashboard') ? 'text-[#FF6600]' : 'text-slate-500 group-hover:text-slate-300' }} mr-3 flex-shrink-0 h-6 w-6"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -140,38 +127,30 @@
                             </svg>
                             Certificados
                         </a>
-
-                        <a href="#"
-                            class="text-slate-400 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium">
-                            <svg class="text-slate-500 group-hover:text-slate-300 mr-3 flex-shrink-0 h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            Configuración
-                        </a>
                     </nav>
                 </div>
                 <div class="flex-shrink-0 flex border-t border-slate-700 p-4">
-                    <a href="#" class="flex-shrink-0 w-full group block">
-                        <div class="flex items-center">
-                            <div>
-                                <img class="inline-block h-9 w-9 rounded-full"
-                                    src="https://ui-avatars.com/api/?name=User+Name&background=FF6600&color=fff" alt="">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-slate-300 group-hover:text-white">
-                                    Usuario
-                                </p>
-                                <p class="text-xs font-medium text-slate-500 group-hover:text-slate-300">
-                                    Ver perfil
-                                </p>
+                    <div class="flex-shrink-0 w-full group block">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div>
+                                    <img class="inline-block h-9 w-9 rounded-full"
+                                        src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=FF6600&color=fff" alt="">
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-slate-300">
+                                        {{ auth()->user()->name }}
+                                    </p>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="text-xs font-medium text-slate-500 hover:text-[#FF6600] transition-colors">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

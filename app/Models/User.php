@@ -6,8 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable implements MustVerifyEmail
+// Aquí agregamos ", FilamentUser" para que el sistema sepa que es un usuario administrador
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -45,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
     /**
      * The courses that the user has purchased.
      */
@@ -54,5 +58,32 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withPivot(['id', 'status', 'payment_method', 'amount'])
             ->wherePivot('status', 'completed')
             ->withTimestamps();
+    }
+
+    /**
+     * All orders made by the user.
+     */
+    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * PERMISO DE ACCESO AL PANEL (NUEVO)
+     * Esto permite entrar al /admin
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->email === env('FILAMENT_ADMIN_EMAIL');
+    }
+
+    public function quizAttempts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
+
+    public function completedLessons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_user')->withTimestamps();
     }
 }

@@ -304,10 +304,16 @@
                                     <span
                                         class="text-2xl font-bold text-white">${{ number_format($course->price, 2) }}</span>
                                 </div>
-                                <a href="{{ route('courses.show', $course->slug) }}"
-                                    class="inline-flex items-center px-4 py-2 border border-[#FF6600] text-sm font-medium rounded-lg text-[#FF6600] hover:bg-[#FF6600] hover:text-white transition-all">
-                                    Ver Detalles
-                                </a>
+                                <div class="flex flex-col gap-2">
+                                    <a href="{{ route('checkout.show', $course) }}"
+                                        class="inline-flex items-center justify-center px-4 py-2 border border-transparent bg-[#FF6600] text-sm font-medium rounded-lg text-white hover:bg-[#E65C00] transition-all shadow-md text-center">
+                                        Inscribirse
+                                    </a>
+                                    <a href="{{ route('courses.show', $course->slug) }}"
+                                        class="inline-flex items-center justify-center px-4 py-2 border border-[#FF6600] text-sm font-medium rounded-lg text-[#FF6600] hover:bg-[#FF6600] hover:text-white transition-all text-center">
+                                        Detalles
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

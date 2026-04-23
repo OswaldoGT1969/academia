@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\User;
+use App\Mail\OrderPendingAdminNotification;
+use Filament\Notifications\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 
@@ -34,7 +38,7 @@ class CheckoutController extends Controller
 
         $path = $request->file('proof')->store('proofs', 'public');
 
-        Order::create([
+        $order = Order::create([
             'user_id' => Auth::id(),
             'course_id' => $course->id,
             'payment_method' => 'bank_transfer',
@@ -42,6 +46,27 @@ class CheckoutController extends Controller
             'amount' => $course->price,
             'proof_of_payment_path' => $path,
         ]);
+
+        // Notificar al administrador (Email)
+        $emails = array_filter([
+            config('app.admin_email'),
+            config('app.notifications_email')
+        ]);
+        
+        foreach ($emails as $email) {
+            Mail::to($email)->send(new OrderPendingAdminNotification($order));
+        }
+
+        // Notificar al administrador (Campanita en el Panel)
+        $admins = User::whereIn('email', $emails)->get();
+        foreach ($admins as $admin) {
+            Notification::make()
+                ->title('Nuevo Pedido con Depósito')
+                ->icon('heroicon-o-shopping-bag')
+                ->body("El alumno **{$order->user->name}** ha solicitado el curso: **{$order->course->title}** por un monto de \${$order->amount}")
+                ->warning()
+                ->sendToDatabase($admin);
+        }
 
         return redirect()->route('dashboard')->with('success', 'Tu comprobante ha sido enviado. Validaremos tu pago en breve.');
     }

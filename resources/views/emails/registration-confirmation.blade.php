@@ -29,7 +29,8 @@
             text-align: center;
         }
         .header img {
-            max-height: 50px;
+            width: 180px;
+            height: auto;
             border-radius: 8px;
         }
         .content {
@@ -81,7 +82,7 @@
     <div class="container">
         <div class="header">
             <!-- Asumiendo que existe el logo, si no se mostrará el nombre de la app -->
-            <img src="{{ asset('images/logo-buenfil.jpg') }}" alt="{{ config('app.name') }}">
+            <img src="{{ asset('images/logo-buenfil.jpg') }}" alt="{{ config('app.name') }}" width="180">
         </div>
         <div class="content">
             <h1>¡Hola, {{ $pendingRegistration->name }}!</h1>

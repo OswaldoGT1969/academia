@@ -74,7 +74,12 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email === env('FILAMENT_ADMIN_EMAIL');
+        $admins = array_filter([
+            config('app.admin_email'),
+            config('app.notifications_email')
+        ]);
+
+        return in_array(strtolower($this->email), array_map('strtolower', $admins));
     }
 
     public function quizAttempts(): \Illuminate\Database\Eloquent\Relations\HasMany

@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'admin_email' => env('FILAMENT_ADMIN_EMAIL'),
+    'notifications_email' => env('NOTIFICATIONS_EMAIL'),
+
 ];

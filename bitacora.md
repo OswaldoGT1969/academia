@@ -1,5 +1,21 @@
 # Bitácora de Desarrollo - Academia Buenfil
 
+## [2026-05-06] - Modernización del Reproductor y Estabilización del Panel Admin
+*Sesión técnica para implementar Plyr.io y corregir errores críticos de base de datos y UI.*
+
+### Funcionalidades Añadidas
+- **Integración de Plyr.io:** Sustitución de iframe por reproductor premium con controles corporativos.
+- **Ajuste de Video:** Implementación de altura máxima (`70vh`) y eliminación de proporciones fijas para mejorar la visualización técnica.
+- **Formato de Precio Dinámico:** Implementación de máscara Alpine.js en Filament para formateo de miles automático (`1,000.00`).
+- **Persistencia de Imágenes:** Optimización de `FileUpload` con `live()` para evitar pérdida de archivos temporales.
+
+### Mejoras Técnicas y Correcciones
+- **Error 500 (Fatal PHP):** Restauración de la carpeta `vendor` mediante `composer install` y limpieza de caché.
+- **Permisos de Servidor:** Corrección de propiedad y permisos (`chown/chmod`) en carpetas de `storage`.
+- **Recuperación de Datos:** Restauración de la cuenta administrativa tras borrado accidental de la base de datos.
+- **Casteo Decimal:** Implementación de `dehydrateStateUsing` para limpiar comas de miles antes de guardar en DB.
+
+
 ## [2026-04-23] - Sesión de Estabilización y Despliegue
 *Sesión enfocada en la separación de entornos, corrección de accesos y sistema de notificaciones.*
 

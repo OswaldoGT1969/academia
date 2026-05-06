@@ -9,6 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Plyr.io Resources -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <style>
+        :root {
+            --plyr-color-main: #FF6600;
+        }
+        .plyr--full-ui.plyr--video .plyr__control--overlaid {
+            background: rgba(255, 102, 0, .8);
+        }
+        .plyr--video .plyr__controls {
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .7));
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+    </style>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -166,16 +181,10 @@
             <div class="max-w-4xl mx-auto p-4 md:p-8">
 
                 <!-- Video Embedding -->
-                <div class="bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-slate-700 mb-8">
-                    <div class="aspect-w-16 aspect-h-9 relative" style="padding-bottom: 56.25%;">
-                        @if($currentLesson->youtube_video_id)
-                            <iframe
-                                src="https://www.youtube.com/embed/{{ $currentLesson->youtube_video_id }}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&showinfo=0&controls=1"
-                                title="{{ $currentLesson->title }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen class="absolute top-0 left-0 w-full h-full">
-                            </iframe>
-                        @else
+                <div class="bg-black rounded-2xl overflow-hidden shadow-2xl ring-1 ring-slate-700 mb-8 mx-auto max-w-full" style="max-height: 70vh;">
+                    @if($currentLesson->youtube_video_id)
+                        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="{{ $currentLesson->youtube_video_id }}"></div>
+                    @else
                             <div
                                 class="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-slate-800 text-slate-500">
                                 <div class="text-center">
@@ -259,6 +268,37 @@
         </main>
     </div>
 
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = new Plyr('#player', {
+                controls: [
+                    'play-large',
+                    'play',
+                    'progress',
+                    'current-time',
+                    'mute',
+                    'volume',
+                    'captions',
+                    'settings',
+                    'pip',
+                    'airplay',
+                    'fullscreen',
+                ],
+                settings: ['quality', 'speed'],
+                youtube: {
+                    noCookie: true,
+                    rel: 0,
+                    showinfo: 0,
+                    iv_load_policy: 3,
+                    modestbranding: 1
+                }
+            });
+
+            // Expose player so it can be used from the console
+            window.player = player;
+        });
+    </script>
 </body>
 
 </html>

@@ -45,11 +45,18 @@ class CourseResource extends Resource
                 Forms\Components\FileUpload::make('image_path')
                     ->label('Imagen del Curso')
                     ->image()
-                    ->directory('courses'),
+                    ->directory('courses')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->live(),
                 Forms\Components\TextInput::make('price')
                     ->label('Precio')
-                    ->numeric()
                     ->prefix('$')
+                    ->extraInputAttributes([
+                        'x-on:input' => "\$el.value = \$el.value.replace(/[^0-9.]/g, '').replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',')"
+                    ])
+                    ->formatStateUsing(fn ($state) => $state ? number_format((float) $state, 2, '.', ',') : null)
+                    ->dehydrateStateUsing(fn ($state) => str_replace(',', '', $state))
                     ->required(),
                 Forms\Components\Toggle::make('is_published')
                     ->label('Publicado')

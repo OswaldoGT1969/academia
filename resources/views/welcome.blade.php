@@ -157,31 +157,36 @@
     </nav>
 
     <!-- Hero Section -->
-    <div class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+    <div class="relative pt-24 pb-16 md:pt-44 md:pb-24 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="lg:w-2/3">
-                <h1
-                    class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6 animate-fade-in-up">
-                    Domina la reparación de <span class="text-[#FF6600]">Laptops</span> a nivel componente
-                </h1>
-                <p class="mt-4 text-xl text-slate-400 max-w-2xl mb-8 leading-relaxed">
-                    Aprende a diagnosticar fuentes de 3 y 5 voltios, uso de osciloscopio, secuencias de encendido y
-                    protocolos avanzados. Formación técnica real para profesionales.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#cursos"
-                        class="inline-flex justify-center items-center px-8 py-4 border border-transparent text-lg font-bold rounded-xl text-white bg-[#FF6600] hover:bg-[#E65C00] transition-all shadow-lg hover:shadow-[#FF6600]/30 transform hover:-translate-y-1">
-                        Empezar Ahora
-                    </a>
-                    @guest
-                        <a href="{{ route('login') }}"
-                            class="inline-flex justify-center items-center px-8 py-4 border border-slate-700 text-lg font-medium rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white transition-all">
-                            Acceder a mi cuenta
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 animate-fade-in-up">
+                    <h1
+                        class="text-4xl md:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                        Domina la reparación de <span class="text-[#FF6600]">Laptops</span> a nivel componente
+                    </h1>
+                    <p class="mt-4 text-lg text-slate-400 mb-8 leading-relaxed">
+                        Aprende a diagnosticar fuentes de 3 y 5 voltios, uso de osciloscopio, secuencias de encendido y
+                        protocolos avanzados. Formación técnica real para profesionales.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#cursos"
+                            class="inline-flex justify-center items-center px-8 py-4 border border-transparent text-lg font-bold rounded-xl text-white bg-[#FF6600] hover:bg-[#E65C00] transition-all shadow-lg hover:shadow-[#FF6600]/30 transform hover:-translate-y-1">
+                            Empezar Ahora
                         </a>
-                    @endguest
+                    </div>
+                </div>
+                <div class="hidden lg:block lg:col-span-7 relative animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl ring-1 ring-slate-700 aspect-[4/3] xl:aspect-video">
+                        <img src="{{ asset('images/hero-workshop.png') }}" alt="Aprendizaje en Academia Buenfil" class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-1000">
+                    </div>
+                    <!-- Elementos decorativos para unir el diseño -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#FF6600]/10 rounded-full blur-3xl -z-10"></div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
                 </div>
             </div>
         </div>
+
         <!-- Abstract Background Elements -->
         <div
             class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-[#FF6600] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob">
@@ -192,12 +197,7 @@
         <div
             class="absolute -bottom-32 left-0 w-96 h-96 bg-[#FF6600] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-4000">
         </div>
-
-        <!-- Hero Image/Graphic (Optional overlay) -->
-        <div
-            class="hidden lg:block absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-0 w-1/2 h-4/5 opacity-60 pointer-events-none">
-            <img src="{{ asset('images/logo-buenfil.jpg') }}" alt="Circuit" class="object-contain w-full h-full">
-        </div>
+    </div>
     </div>
 
     <!-- Why Us Section -->
@@ -212,46 +212,55 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <!-- Feature 1 -->
                 <div
-                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group">
+                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group flex flex-col">
+                    <div class="mb-6 h-32 w-full overflow-hidden rounded-xl border border-slate-700/50 group-hover:border-[#FF6600]/30 transition-all">
+                        <img src="{{ asset('images/features/schematic.png') }}" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" alt="Diagnóstico">
+                    </div>
                     <div
-                        class="w-14 h-14 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
-                        <svg class="w-8 h-8 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="w-12 h-12 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
+                        <svg class="w-6 h-6 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Diagnóstico Preciso</h3>
-                    <p class="text-slate-400">Aprende a interpretar esquemáticos y boardviews para encontrar el fallo
+                    <p class="text-slate-400 text-sm">Aprende a interpretar esquemáticos y boardviews para encontrar el fallo
                         exacto en la placa madre.</p>
                 </div>
 
                 <!-- Feature 2 -->
                 <div
-                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group">
+                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group flex flex-col">
+                    <div class="mb-6 h-32 w-full overflow-hidden rounded-xl border border-slate-700/50 group-hover:border-[#FF6600]/30 transition-all">
+                        <img src="{{ asset('images/features/power.png') }}" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" alt="Potencia">
+                    </div>
                     <div
-                        class="w-14 h-14 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
-                        <svg class="w-8 h-8 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="w-12 h-12 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
+                        <svg class="w-6 h-6 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Electrónica de Potencia</h3>
-                    <p class="text-slate-400">Domina el funcionamiento de fuentes step-down, circuitos de carga y
+                    <p class="text-slate-400 text-sm">Domina el funcionamiento de fuentes step-down, circuitos de carga y
                         reguladores lineales.</p>
                 </div>
 
                 <!-- Feature 3 -->
                 <div
-                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group">
+                    class="bg-slate-900/50 p-8 rounded-2xl border border-slate-700/50 hover:border-[#FF6600]/30 transition-all hover:-translate-y-2 group flex flex-col">
+                    <div class="mb-6 h-32 w-full overflow-hidden rounded-xl border border-slate-700/50 group-hover:border-[#FF6600]/30 transition-all">
+                        <img src="{{ asset('images/features/tools.png') }}" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" alt="Herramientas">
+                    </div>
                     <div
-                        class="w-14 h-14 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
-                        <svg class="w-8 h-8 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="w-12 h-12 bg-[#FF6600]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#FF6600]/20 transition-colors">
+                        <svg class="w-6 h-6 text-[#FF6600]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Herramientas Profesionales</h3>
-                    <p class="text-slate-400">Saca el máximo provecho a tu osciloscopio, multímetro y fuente de
+                    <p class="text-slate-400 text-sm">Saca el máximo provecho a tu osciloscopio, multímetro y fuente de
                         laboratorio.</p>
                 </div>
             </div>

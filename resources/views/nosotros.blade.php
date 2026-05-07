@@ -47,6 +47,8 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ route('home') }}"
+                        class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Inicio</a>
                     <a href="{{ route('home') }}#cursos"
                         class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Cursos</a>
                     <a href="{{ route('about') }}"
@@ -54,6 +56,52 @@
                     @auth
                         <a href="{{ route('dashboard') }}"
                             class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Mis Cursos</a>
+                        <div class="relative ml-3" x-data="{ open: false }">
+                            <div>
+                                <button @click="open = !open" @click.away="open = false" type="button"
+                                    class="flex items-center max-w-xs text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF6600] focus:ring-offset-slate-900 bg-slate-800 p-1 pr-3 border border-slate-700 hover:border-[#FF6600]/30 transition-all"
+                                    id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <span class="sr-only">Open user menu</span>
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-[#FF6600]/10 flex items-center justify-center text-[#FF6600] font-bold border border-[#FF6600]/20">
+                                        {{ substr(Auth::user()->name, 0, 1) }}
+                                    </div>
+                                    <span class="ml-2 text-slate-300 font-medium">{{ Auth::user()->name }}</span>
+                                    <svg class="ml-2 h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                                x-transition:enter-start="transform opacity-0 scale-95"
+                                x-transition:enter-end="transform opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="transform opacity-100 scale-100"
+                                x-transition:leave-end="transform opacity-0 scale-95"
+                                class="origin-top-right absolute right-0 mt-2 w-56 rounded-xl shadow-lg py-1 bg-slate-800 ring-1 ring-black ring-opacity-5 focus:outline-none border border-slate-700 z-50"
+                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
+                                style="display: none;">
+                                <div class="px-4 py-3 border-b border-slate-700/50">
+                                    <p class="text-xs text-slate-500 uppercase tracking-wider font-bold">Conectado como</p>
+                                    <p class="text-sm font-medium text-white truncate">{{ Auth::user()->email }}</p>
+                                </div>
+                                <a href="{{ route('home') }}"
+                                    class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+                                    role="menuitem" tabindex="-1">Página Principal</a>
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-slate-700 hover:text-red-300 transition-colors"
+                                        role="menuitem" tabindex="-1">
+                                        Cerrar sesión
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     @else
                         <a href="{{ route('login') }}"
                             class="text-slate-300 hover:text-white transition-colors font-medium">Login</a>

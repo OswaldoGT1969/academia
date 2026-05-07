@@ -77,6 +77,8 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
+                    <a href="{{ route('home') }}"
+                        class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Inicio</a>
                     <a href="#cursos"
                         class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Cursos</a>
                     <a href="{{ route('about') }}"
@@ -118,7 +120,7 @@
                                 </div>
                                 <a href="{{ route('home') }}"
                                     class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
-                                    role="menuitem" tabindex="-1">Dashboard</a>
+                                    role="menuitem" tabindex="-1">Página Principal</a>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

@@ -5,6 +5,9 @@ use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CourseController::class, 'index'])->name('home');
+Route::get('/nosotros', function () {
+    return view('nosotros');
+})->name('about');
 Route::get('/curso/{slug}', [CourseController::class, 'show'])->name('courses.show');
 Route::get('/aula/{course_slug}/{lesson_id?}', [CourseController::class, 'lesson'])->name('lessons.show');
 

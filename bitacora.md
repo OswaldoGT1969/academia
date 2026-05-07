@@ -8,6 +8,8 @@
 - **Ajuste de Video:** Implementación de altura máxima (`70vh`) y eliminación de proporciones fijas para mejorar la visualización técnica.
 - **Formato de Precio Dinámico:** Implementación de máscara Alpine.js en Filament para formateo de miles automático (`1,000.00`).
 - **Persistencia de Imágenes:** Optimización de `FileUpload` con `live()` para evitar pérdida de archivos temporales.
+- **Rediseño Visual Hero (IA):** Generación de imagen principal personalizada y reestructuración de la sección Hero en dos columnas para evitar solapamiento.
+- **Activos Técnicos de Beneficios:** Creación de imágenes HD para Boardview, Electrónica de potencia y Herramientas profesionales.
 
 ### Mejoras Técnicas y Correcciones
 - **Error 500 (Fatal PHP):** Restauración de la carpeta `vendor` mediante `composer install` y limpieza de caché.

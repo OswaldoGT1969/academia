@@ -11,7 +11,7 @@ En tu cuenta de Stripe, ve a **Developers > API Keys** y asegúrate de estar en 
 El Webhook es lo que permite que Stripe le avise a tu academia que un pago fue exitoso para que el curso se libere automáticamente.
 1. Ve a **Developers > Webhooks**.
 2. Haz clic en **Add endpoint**.
-3. **Endpoint URL**: `https://academia.elrincondeoswaldo.com/stripe/webhook`
+3. **Endpoint URL**: `https://academia.soportetecnicobuenfil.com/stripe/webhook`
 4. **Select events**: Elige el evento `checkout.session.completed`.
 5. Una vez guardado, haz clic en **Reveal** bajo la sección "Signing secret".
 - **STRIPE_WEBHOOK_SECRET**: Esta llave empieza con `whsec_...`.

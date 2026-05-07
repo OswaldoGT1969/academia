@@ -79,7 +79,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#cursos"
                         class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Cursos</a>
-                    <a href="#nosotros"
+                    <a href="{{ route('about') }}"
                         class="text-slate-300 hover:text-[#FF6600] transition-colors font-medium">Nosotros</a>
                     @auth
                         <a href="{{ route('dashboard') }}"
@@ -329,13 +329,6 @@
                 @endforeach
             </div>
 
-            @if($courses->isEmpty())
-                <div class="text-center py-20 bg-slate-800 rounded-3xl border border-dashed border-slate-700">
-                    <p class="text-slate-500 text-lg">Próximamente publicaremos nuevos cursos.</p>
-                </div>
-            @endif
-        </div>
-    </div>
 
     <!-- CTA Section -->
     <div class="bg-[#FF6600] py-16">

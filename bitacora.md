@@ -10,6 +10,11 @@
 - **Persistencia de Imágenes:** Optimización de `FileUpload` con `live()` para evitar pérdida de archivos temporales.
 - **Rediseño Visual Hero (IA):** Generación de imagen principal personalizada y reestructuración de la sección Hero en dos columnas para evitar solapamiento.
 - **Activos Técnicos de Beneficios:** Creación de imágenes HD para Boardview, Electrónica de potencia y Herramientas profesionales.
+- **Fase de Profesionalización y Arquitectura:**
+    - **Nueva Vista Nosotros:** Creación de `/nosotros` para alojar biografía, testimonios y FAQ.
+    - **Identidad Realista:** Generación de retrato auténtico de Arturo Buenfil en su taller.
+    - **Navegación Unificada:** Implementación de enlace "Inicio" global y sincronización de headers.
+    - **Ajuste de Políticas:** Actualización de acceso vitalicio a acceso por un año (FAQ).
 
 ### Mejoras Técnicas y Correcciones
 - **Error 500 (Fatal PHP):** Restauración de la carpeta `vendor` mediante `composer install` y limpieza de caché.
